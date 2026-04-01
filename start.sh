@@ -20,5 +20,10 @@
                                                                                               done
                                                                                               ) &
 
-                                                                                              # Run Expo in foreground so the container stays alive
-                                                                                              exec npx expo start --tunnel
+                                                                                              # Run Expo with tunnel in a retry loop so the container never exits
+                                                                                              while true; do
+                                                                                                echo "Starting Expo with tunnel mode..."
+                                                                                                  npx expo start --tunnel || true
+                                                                                                    echo "Expo process exited. Restarting in 5 seconds..."
+                                                                                                      sleep 5
+                                                                                                      done
